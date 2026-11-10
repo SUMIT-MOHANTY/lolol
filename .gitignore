@@ -2,6 +2,8 @@
 # Dsuite internal agent communication & synchronization
 .agent/
 .agent
+.agent_worktrees/
+.agent_worktrees
 .agent_history/
 .agent_history
 .agent_ipc/
@@ -10,10 +12,6 @@
 .agent_signals
 .agent_initialized
 .package_deps_hash
-
-# Dsuite internal agent communication & synchronization
-.agent_worktrees/
-.agent_worktrees
 node_modules/
 node_modules
 **/node_modules/**
