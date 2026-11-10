@@ -1,0 +1,29 @@
+# Docker Compose - Base Configuration
+# For production-like deployment with SQLite (default)
+# For PostgreSQL, use: docker compose -f docker-compose.yml -f docker-compose.override.yml up
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: django-calculator-web
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+      - DJANGO_DEBUG=${DJANGO_DEBUG:-False}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      - DATABASE_URL=${DATABASE_URL:-}
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput --clear &&
+             gunicorn calculator_project.wsgi:application --config gunicorn.conf.py"
+    restart: unless-stopped
+    networks:
+      - calculator-network
+
+networks:
+  calculator-network:
+    driver: bridge

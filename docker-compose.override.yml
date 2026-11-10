@@ -1,0 +1,40 @@
+# Docker Compose Override - PostgreSQL Promotion Path
+# Usage: docker compose -f docker-compose.yml -f docker-compose.override.yml up --build
+#
+# This override file enables PostgreSQL 16 for production-like testing
+# without modifying the base docker-compose.yml file.
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: django-calculator-db
+    environment:
+      - POSTGRES_DB=calculator_db
+      - POSTGRES_USER=calc_user
+      - POSTGRES_PASSWORD=calc_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U calc_user -d calculator_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - calculator-network
+
+  web:
+    environment:
+      - DATABASE_URL=postgres://calc_user:calc_pass@db:5432/calculator_db
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput --clear &&
+             gunicorn calculator_project.wsgi:application --config gunicorn.conf.py"
+
+volumes:
+  postgres_data:
+    driver: local
