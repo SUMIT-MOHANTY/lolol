@@ -1,0 +1,174 @@
+/*
+ * Django Calculator - Custom Styles
+ * Professional calculator aesthetic with precision-focused design
+ */
+
+/* Result Display Register */
+.result-display {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Consolas', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #198754;
+    text-align: right;
+    padding: 0.5rem 0;
+    letter-spacing: 0.02em;
+}
+
+/* Error Display */
+.error-display {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Card Styling Enhancements */
+.card {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding: 1rem 1.25rem;
+}
+
+.card-header h4 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Form Control Styling */
+.form-control {
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Consolas', monospace;
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* Form Select Styling */
+.form-select {
+    font-size: 1rem;
+    padding: 0.75rem 2.25rem 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Button Styling */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.25);
+}
+
+/* Alert Styling */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* Invalid Feedback */
+.invalid-feedback {
+    font-size: 0.875rem;
+    margin-top: 0.375rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.25rem;
+    }
+    
+    .result-display {
+        font-size: 1.75rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Shadow Enhancement */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+/* Page Background */
+body.bg-light {
+    background-color: #f5f7fa !important;
+    min-height: 100vh;
+}
+
+/* Container Spacing */
+.container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}

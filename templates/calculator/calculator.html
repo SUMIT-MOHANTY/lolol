@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Calculator{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4 class="mb-0">🧮 Calculator</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Operand A Field -->
+                    <div class="mb-3">
+                        <label for="id_operand_a" class="form-label">First Number</label>
+                        <input type="number" 
+                               name="operand_a" 
+                               id="id_operand_a" 
+                               class="form-control {% if form.operand_a.errors %}is-invalid{% endif %}" 
+                               step="any"
+                               value="{{ form.operand_a.value|default:'' }}">
+                        {% if form.operand_a.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.operand_a.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Operation Field -->
+                    <div class="mb-3">
+                        <label for="id_operation" class="form-label">Operation</label>
+                        <select name="operation" id="id_operation" class="form-select {% if form.operation.errors %}is-invalid{% endif %}">
+                            {% for choice_value, choice_label in form.operation.field.choices %}
+                                <option value="{{ choice_value }}" {% if form.operation.value == choice_value %}selected{% endif %}>
+                                    {{ choice_label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        {% if form.operation.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.operation.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Operand B Field -->
+                    <div class="mb-3">
+                        <label for="id_operand_b" class="form-label">Second Number</label>
+                        <input type="number" 
+                               name="operand_b" 
+                               id="id_operand_b" 
+                               class="form-control {% if form.operand_b.errors %}is-invalid{% endif %}" 
+                               step="any"
+                               value="{{ form.operand_b.value|default:'' }}">
+                        {% if form.operand_b.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.operand_b.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Button Row -->
+                    <div class="d-grid gap-2 d-sm-flex mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Calculate</button>
+                        <a href="{% url 'calculator:reset' %}" class="btn btn-outline-secondary btn-lg w-100">Reset</a>
+                    </div>
+                </form>
+                
+                <!-- Result Display (conditional) -->
+                {% if result is not None %}
+                <div class="alert alert-success mt-4">
+                    <small class="text-muted">Result</small>
+                    <div class="result-display">{{ result }}</div>
+                </div>
+                {% endif %}
+                
+                <!-- Error Display (conditional) -->
+                {% if error_message %}
+                <div class="alert alert-danger mt-4">
+                    <div class="error-display">⚠️ {{ error_message }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
